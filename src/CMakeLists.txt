@@ -1,6 +1,11 @@
 project(SuperTeacher)
 
-find_package(SDL2 REQUIRED)
+if(MINGW)
+  include(ExternalSDL2)
+else()
+  find_package(SDL2 REQUIRED)
+endif()
+
 include_directories(${SDL2_INCLUDE_DIR})
 
 add_executable(SuperTeacher main.cpp)
