@@ -43,19 +43,21 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     HIManager user_input = { window };
 
     user_input.HIEvent_sig.connect([level_info,&view](HIEvent event)->void {
+        static float factor = 1;
         switch (event) {
         case HIEvent::CLOSE:
             level_info->end = true;
             break;
         case HIEvent::DOWN_DOWN:
-            if (view.GetView().getSize().x == SCREEN_X_PXSIZE)
+            if (factor <= 2)
             {
-                view.SetSize(sf::Vector2f(1.2*SCREEN_X_PXSIZE, 1.2*SCREEN_Y_PXSIZE));
+                factor += 0.2;
             }
             else
             {
-                view.SetSize(sf::Vector2f(1*SCREEN_X_PXSIZE, 1*SCREEN_Y_PXSIZE));
+                factor = 1;
             }
+            view.SetSize(sf::Vector2f(factor*SCREEN_X_PXSIZE, factor*SCREEN_Y_PXSIZE));
             break;
         default:
             break;
