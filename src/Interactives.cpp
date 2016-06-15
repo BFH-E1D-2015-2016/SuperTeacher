@@ -222,6 +222,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
             if (rect.intersects(pack->sprite->getGlobalBounds()))
             {
                 mainPerson.addPencil(pack->value);
+                *points += pack->value;
                 pack->deleteFlag = true;
                 del_pack = true;
             }
@@ -281,6 +282,7 @@ level_str Interactives::update(Character& mainPerson, std::shared_ptr<sf::Text> 
             if (rect.intersects(pack->sprite->getGlobalBounds()))
             {
                 mainPerson.addLive(pack->value);
+                *points += pack->value;
                 pack->deleteFlag = true;
                 del_pack = true;
             }

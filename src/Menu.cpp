@@ -72,6 +72,7 @@ void Menu::update(level_str level_info, sf::RenderWindow* window)
 void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config, sf::RenderWindow * window, level_str * level_info)
 {
     static int level_num = 0;
+    static auto style = (((*config)["video"]["fullscreen"]) ? sf::Style::Fullscreen : sf::Style::Default);
     switch (events) {
     case HIEvent::MOUSE_DOWN:
         for (auto button : buttons)
@@ -126,21 +127,18 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
                 {
                     window->close();
                 }
+                if (button->function == "screen_mode")
+                {
+                    style = ((style != sf::Style::Fullscreen) ? sf::Style::Fullscreen : sf::Style::Default);
+
+                    window->create(sf::VideoMode(SCREEN_X_PXSIZE, SCREEN_Y_PXSIZE),
+                        "SuperTeacher",
+                        style);
+                    window->setKeyRepeatEnabled(false);
+                }
             }
         }
         break;
-        /*case HIEvent::GO_UP:
-        view.move(0, -1);
-        break;
-        case HIEvent::GO_DOWN:
-        view.move(0, 1);
-        break;
-        case HIEvent::GO_LEFT:
-        view.move(-1, 0);
-        break;
-        case HIEvent::GO_RIGHT:
-        view.move(1, 0);
-        break;*/
     default:
         break;
     }

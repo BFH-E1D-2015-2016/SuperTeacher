@@ -36,7 +36,7 @@ Character::Character(std::shared_ptr<ResourceManager> resource, std::string leve
     flag1 = true;
 }
 
-void Character::process_event(HIEvent event){
+void Character::process_event(HIEvent event, int* score){
 
     static int move_step = 0;
     static int counter = 0;
@@ -130,6 +130,7 @@ void Character::process_event(HIEvent event){
         case HIEvent::THROW:
             if (m_nb_pencils > 0)
             {
+                *score-=1;
                 posy = (float)(get_rectangle().top + get_rectangle().height / 2.0-THROW_LEVEL);
                 posx = (float)(get_rectangle().left + get_rectangle().width / 2.0);
                 m_pencils.push_back(Pencil(m_resource, posx, posy, direction));

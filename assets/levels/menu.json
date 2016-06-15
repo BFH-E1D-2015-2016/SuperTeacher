@@ -5,6 +5,7 @@
                {"x":0,"y":-5,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Jouer","function":"play"},
                {"x":0,"y":0,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Recommencer","function":"restart"},
                {"x":0,"y":5,"image_off":"menu/button_1","image_on":"menu/button_2","name":"Sortir","function":"quit"},
+               {"x":12,"y":7,"image_off":"menu/screen_mode_1","image_on":"menu/screen_mode_2","name":"","function":"screen_mode"},
                {"x":5,"y":-8,"image_off":"interactives/invisible","image_on":"interactives/invisible","name":" ","function":"score"}
                    ]
 }

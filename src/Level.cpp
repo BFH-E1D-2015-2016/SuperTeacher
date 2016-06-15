@@ -38,7 +38,7 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
 
     std::array<std::array<int, 18>, 32> ColisionDetect = {};
     const int SOLID = 1;
-
+    window->setMouseCursorVisible(false);
     window->setFramerateLimit(50);
     HIManager user_input = { window };
 
@@ -49,9 +49,9 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
             level_info->end = true;
             break;
         case HIEvent::DOWN_DOWN:
-            if (factor <= 2)
+            if (factor <= 1.6)
             {
-                factor += 0.2;
+                factor += 0.3;
             }
             else
             {
@@ -90,8 +90,8 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     std::shared_ptr<sf::Text> pencil = make_shared<sf::Text>("Pencils: " + to_string(character.getNbPencil()), *font, 50);
     text.Add_Text(pencil, sf::Vector2f(-900, -75) + view.GetView().getCenter());
 
-    user_input.HIEvent_sig.connect([&character](HIEvent event)->void {
-        character.process_event(event);
+    user_input.HIEvent_sig.connect([&character,&level_info](HIEvent event)->void {
+        character.process_event(event,&level_info->score);
     });
 
 
@@ -151,6 +151,7 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
         window->display();
         window->clear();
     }
+    window->setMouseCursorVisible(true);
     user_input.HIEvent_sig.disconnect_all_slots();
     return win;
 }

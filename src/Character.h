@@ -18,7 +18,7 @@
 
 class Character: public Object {
 public:
-    void process_event(HIEvent event);
+    void process_event(HIEvent event,int* score);
     void update(void);
     Character(std::shared_ptr<ResourceManager> ressource, std::string level_name,int GroundLevel);
     std::vector<std::shared_ptr<sf::Drawable>> get_drawables(void);
