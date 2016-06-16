@@ -17,7 +17,8 @@ typedef enum
     charge,
     mouse,
     live,
-    end
+    end,
+    wall
 }function_enum;
 
 typedef struct

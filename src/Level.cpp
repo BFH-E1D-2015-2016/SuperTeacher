@@ -83,7 +83,7 @@ bool level_execute(level_str* level_info, sf::RenderWindow* window)
     std::string gr_name = (*level)["ground"]["name"];
 
 
-    auto character = Character(resource, "level", ground_level);
+    auto character = Character(resource, level_info->name, ground_level);
 
     character.addPencil((*level)["init"]["pencil"]);
 

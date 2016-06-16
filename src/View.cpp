@@ -25,7 +25,7 @@ void View::process(sf::FloatRect CenterObj)
     }
     else
     {
-        x = PlaySpace.left + view.getSize().x / 2;
+        x = PlaySpace.left + (view.getSize().x+1) / 2;
     }
      // y limits
     if (CenterObj.top + CenterObj.height / 2 > PlaySpace.top + view.getSize().y / 2)

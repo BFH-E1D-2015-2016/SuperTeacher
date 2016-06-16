@@ -72,6 +72,7 @@ void Menu::update(level_str level_info, sf::RenderWindow* window)
 void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config, sf::RenderWindow * window, level_str * level_info)
 {
     static int level_num = 0;
+    static int level_max = ((*config)["level_names"]).size();
     static auto style = (((*config)["video"]["fullscreen"]) ? sf::Style::Fullscreen : sf::Style::Default);
     switch (events) {
     case HIEvent::MOUSE_DOWN:
@@ -91,7 +92,7 @@ void Menu::process_event_menu(HIEvent events, std::shared_ptr<const json> config
                     {
                         *level_info = temp_level;
                         level_num++;
-                        if (level_num >= ((int)(*config)["level_number"]))
+                        if (level_num >= level_max)
                         {
                             level_num = 0;
                         }

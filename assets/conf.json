@@ -4,7 +4,7 @@
   },
     "audio": true,
   "level_names":[
-    "level"
-     ],
-  "level_number":1
+    "level",
+    "level_2"
+     ]
 }

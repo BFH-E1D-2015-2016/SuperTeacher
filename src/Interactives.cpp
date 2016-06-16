@@ -42,6 +42,10 @@ function_enum string_conv(std::string text)
     {
         convert_val = end;
     }
+    if (text == "wall")
+    {
+        convert_val = wall;
+    }
     return convert_val;
 }
 
@@ -71,8 +75,16 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
         }
         else
         {
-            temp->setScale(object["size"], object["size"]);
-            sprite->scale = object["size"];
+            if (sprite->function == wall)
+            {
+                temp->setScale(object["x_size"], object["y_size"]);
+                sprite->function = platform;
+            }
+            else
+            {
+                temp->setScale(object["size"], object["size"]);
+                sprite->scale = object["size"];
+            }
         }
         if (sprite->function != mouse)
         {
@@ -100,23 +112,25 @@ Interactives::Interactives(std::shared_ptr<ResourceManager> resource, std::strin
     auto texture = m_resource->get_texture("graphics/interactives/blanc.png");
     temp1->setTexture(*texture);
     sprite1->sprite = temp1;
-    sprite1->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE+SECUR_SPACE*10));
+    //sprite1->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE+SECUR_SPACE*10));
+    sprite1->sprite->setScale(SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE + SECUR_SPACE * 10);
     sprite1->function = platform;
     sprite1->use = false;
     sprite1->value = 0;
     sprite1->deleteFlag = false;
-    sprite1->sprite->setPosition(-SECUR_SPACE, -SCREEN_Y_PXSIZE - SECUR_SPACE * 10);
+    sprite1->sprite->setPosition(-SECUR_SPACE*5, SCREEN_Y_PXSIZE- ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE);
     m_sprites.push_back(sprite1);
     auto sprite2 = std::make_shared<act_pack>();
     auto temp2 = std::make_shared<sf::Sprite>();
     temp2->setTexture(*texture);
     sprite2->sprite = temp2;
-    sprite2->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE + SECUR_SPACE * 10));
+    //sprite2->sprite->setTextureRect(sf::IntRect(0, 0, SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE + SECUR_SPACE * 10));
+    sprite2->sprite->setScale(SECUR_SPACE, ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE + SECUR_SPACE * 10);
     sprite2->function = platform;
     sprite2->use = false;
     sprite2->value = 0;
     sprite2->deleteFlag = false;
-    sprite2->sprite->setPosition(((int)(*level)["background"]["world"]["x"])*BLOCK_PXSIZE, -SCREEN_Y_PXSIZE - SECUR_SPACE * 10);
+    sprite2->sprite->setPosition(((int)(*level)["background"]["world"]["x"])*BLOCK_PXSIZE, SCREEN_Y_PXSIZE - ((int)(*level)["background"]["world"]["y"])*BLOCK_PXSIZE);
     m_sprites.push_back(sprite2);
     val = 0;
 }
